@@ -33,13 +33,28 @@ var button = document.getElementById("reservation-btn");
 document.getElementById("show-more").addEventListener("click", function() {
     var additionalConveniences = document.querySelector(".additional-conveniences");
     
-    // Променяме видимостта на допълнителните екстри
     if (additionalConveniences.style.display === "none" || additionalConveniences.style.display === "") {
         additionalConveniences.style.display = "grid";
-        this.textContent = "Покажи по-малко екстри"; // Променяме текста на бутона
+        this.textContent = "Покажи по-малко екстри";
     } else {
         additionalConveniences.style.display = "none";
-        this.textContent = "Покажи още екстри"; // Връщаме текста обратно
+        this.textContent = "Покажи още екстри";
     }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const profileBtn = document.getElementById("profile-btn");
+    const modal = document.getElementById("profile-modal");
+
+    profileBtn.addEventListener("click", function (event) {
+        event.stopPropagation();
+        modal.style.display = modal.style.display === "flex" ? "none" : "flex";
+    });
+
+    document.addEventListener("click", function (event) {
+        if (modal.style.display === "flex" && !modal.contains(event.target) && event.target !== profileBtn) {
+            modal.style.display = "none";
+        }
+    });
 });
 

@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'styles/register.css' %}">
+    <title>Title</title>
+</head>
+<body>
+<main>
+    <div class="register-form-container">
+        <h1>ВЛИЗАНЕ</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.username.label }}
+            {{ form.username }}
+            {{ form.username.errors }}
+            {{ form.password.label }}
+            {{ form.password }}
+            {{ form.password.errors }}
+            <input type="submit" value="Вход" class = 'register-btn'>
+        </form>
+        <a href="{% url 'register' %}">Нямаш акаунт?</a>
+    </div>
+</main>
+</body>
+</html>
