@@ -5,460 +5,72 @@
     box-sizing: border-box;
   }
   
-  body {
+.create-reservation-container{
     display: flex;
-    width: 100%;
-    justify-content: space-around;
     align-items: center;
-    place-items: center;
-    background: linear-gradient(to right, #9796f0, #42445A);
-    overflow-y: auto;
-    min-height: 100vh;
-  }
-  
-  .calendar {
-    height: 30rem;
-    width: max-content;
-    background-color: white;
-    border-radius: 25px;
-    overflow: hidden;
-    padding: 35px 50px 0px 50px;
-  }
-  
-  .calendar {
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  }
-  
-  .calendar-header {
-    background: #8089FE;
-    display: flex;
     justify-content: space-between;
-    border-radius: 7px;
-    align-items: center;
-    font-weight: 700;
-    color: #ffffff;
-    padding: 10px;
-  }
-  
-  .calendar-body {
-    padding: 10px;
-  }
-  
-  .calendar-week-days {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    font-weight: 600;
-    cursor: pointer;
-    color: rgb(104, 104, 104);
-  }
-  
-  .calendar-week-days div:hover {
-    color: black;
-    transform: scale(1.2);
-    transition: all .2s ease-in-out;
-  }
-  
-  .calendar-week-days div {
-    display: grid;
-    place-items: center;
-    color: #6D67CF;
-    height: 50px;
-  }
-  
-  .calendar-days {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 2px;
-    color: #0A0921;
-  }
-  
-  .calendar-days div {
-    width: 37px;
-    height: 33px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5px;
-    position: relative;
-    cursor: pointer;
-    animation: to-top 1s forwards;
-  }
-  
-  .month-picker {
-    padding: 5px 10px;
-    border-radius: 10px;
-    cursor: pointer;
-  }
-  
-  .year-picker {
-    display: flex;
-    align-items: center;
-  }
-  
-  .year-change {
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    margin: 0px 10px;
-    cursor: pointer;
-  }
-  
-  .year-change:hover {
-    background-color: #9796f0;
-    transition: all .2s ease-in-out;
-    transform: scale(1.12);
-  }
-  
-  .calendar-footer {
-    padding: 10px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
-  
-  #year:hover {
-    cursor: pointer;
-    transform: scale(1.2);
-    transition: all 0.2 ease-in-out;
-  }
-  
-  .calendar-days div span {
-    position: absolute;
-  }
-  
-  .calendar-days div:hover {
-    transition: width 0.2s ease-in-out, height 0.2s ease-in-out;
-    background-color: #fbc7d4;
-    border-radius: 20%;
-    color: #f8fbff;
-  }
-  
-  .calendar-days div.current-date {
-    color: #f8fbff;
-    background-color: #9796f0;
-    border-radius: 20%;
-  }
-  
-  .month-list {
-    position: relative;
-    left: 0;
-    top: -130px;
-    background-color: #ebebeb;
-    color: #151426;
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    gap: 5px;
-    border-radius: 20px;
-  }
-  
-  .month-list>div {
-    display: grid;
-    place-content: center;
-    margin: 5px 10px;
-    transition: all 0.2s ease-in-out;
-  }
-  
-  .month-list>div>div {
-    border-radius: 15px;
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  .month-list>div>div:hover {
-    background-color: #9796f0;
-    color: #f8fbff;
-    transform: scale(0.9);
-    transition: all 0.2s ease-in-out;
-  }
-  
-  .month-list.show {
-    visibility: visible;
-    pointer-events: visible;
-    transition: 0.6s ease-in-out;
-    animation: to-left .71s forwards;
-  }
-  
-  .month-list.hideonce {
-    visibility: hidden;
-  }
-  
-  .month-list.hide {
-    animation: to-right 1s forwards;
-    visibility: none;
-    pointer-events: none;
-  }
-  
-  .date-time-formate {
-    height: 4rem;
     width: 100%;
-    font-family: Dubai Light, Century Gothic;
-    position: relative;
-    display: flex;
-    top: 50px;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .day-text-formate {
-    font-family: Microsoft JhengHei UI;
-    font-size: 1.4rem;
-    padding-right: 5%;
-    border-right: 3px solid #9796f0;
-  }
-  
-  .date-time-value {
-    display: block;
-    position: relative;
-    text-align: center;
-    padding-left: 5%;
-  }
-  
-  .time-formate {
-    font-size: 1.5rem;
-  }
-  
-  .time-formate.hideTime {
-    animation: hidetime 1.5s forwards;
-  }
-  
-  .day-text-formate.hidetime {
-    animation: hidetime 1.5s forwards;
-  }
-  
-  .date-formate.hideTime {
-    animation: hidetime 1.5s forwards;
-  }
-  
-  .day-text-formate.showtime {
-    animation: showtime 1s forwards;
-  }
-  
-  .time-formate.showtime {
-    animation: showtime 1s forwards;
-  }
-  
-  .date-formate.showtime {
-    animation: showtime 1s forwards;
-  }
-  
-  @keyframes to-top {
-    0% {
-      transform: translateY(0);
-      opacity: 0;
-    }
-  
-    100% {
-      transform: translateY(100%);
-      opacity: 1;
-    }
-  }
-  
-  @keyframes to-left {
-    0% {
-      transform: translatex(230%);
-      opacity: 1;
-    }
-  
-    100% {
-      transform: translatex(0);
-      opacity: 1;
-    }
-  }
-  
-  @keyframes to-right {
-    10% {
-      transform: translatex(0);
-      opacity: 1;
-    }
-  
-    100% {
-      transform: translatex(-150%);
-      opacity: 1;
-    }
-  }
-  
-  @keyframes showtime {
-    0% {
-      transform: translatex(250%);
-      opacity: 1;
-    }
-  
-    100% {
-      transform: translatex(0%);
-      opacity: 1;
-    }
-  }
-  
-  @keyframes hidetime {
-    0% {
-      transform: translatex(0%);
-      opacity: 1;
-    }
-  
-    100% {
-      transform: translatex(-370%);
-      opacity: 1;
-    }
-  }
+    height: 100vh;
+    padding: 0 300px;
+}
 
-  form{
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    flex-direction: column;
-    gap: 20px;
-  }
+.calendar-help-text{
+    margin: 20px auto;
+}
 
-  form label{
-    font-size: 20px;
-    color: white;
-    margin-bottom: -15px;
-  }
+.calendar-help-text p{
+    color: red;
+    font-size: 16px;
+    font-weight: bold;
+}
 
-  form input{
-    padding: 15px 0px 15px 5px;
-    width: 500px;
-    border-radius: 5px;
-    outline: none;
+#calendar{
+    width: 600px;
     border: 1px solid gray;
-  }
+    padding: 50px;
+    border-radius: 50px;
+}
 
-  form h2{
-    color: white;
-    margin: auto;
-    font-size: 30px;
-  }
+#reservation-form{
+    width: 600px;
+    font-size: 20px;
+    border: 1px solid gray;
+    padding: 50px;
+    border-radius: 50px;
+}
 
-  .message{
-    height: 200px;
+#reservation-form input{
     width: 100%;
-    padding: 10px;
+    padding: 20px 0 20px 10px;
+    outline: none;
+    border-radius: 10px;
+    border: 1px solid gray;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 16px;
 }
 
-.info{
+#reservation-form label{
+    padding-left: 5px;
+}
+
+#reservation-form button[type='submit']{
+    border: none;
+    font-size: 20px;
+    background-color: #bc6a2f;
     color: white;
-    display: flex;
-    align-self: flex-end;
-    justify-content: center;
-    flex-direction: column;
-    margin-bottom: 30px;
-    gap: 5px;
-    font-size: larger;
-  }
-
-hr{
-  margin-top: 10px;
-  margin-bottom: 15px;
+    padding: 15px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin: 10px auto;
 }
 
-input[type="submit"]{
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 20px;
+#reservation-form button[type='submit']:hover{
+    background-color: #8a430f;
+    transition: 0.3s;
 }
 
-
-@media (max-width: 768px) {
-  body {
-      flex-direction: column;
-      justify-content: flex-start;
-  }
-
-  .calendar {
-      width: 100%;
-      padding: 20px;
-  }
-
-  .calendar-header {
-      flex-direction: column;
-      align-items: center;
-      padding: 15px;
-  }
-
-  .calendar-week-days {
-      grid-template-columns: repeat(4, 1fr);
-      font-size: 0.8rem;
-  }
-
-  .calendar-days {
-      grid-template-columns: repeat(4, 1fr);
-  }
-
-  .calendar-days div {
-      width: 30px;
-      height: 30px;
-      font-size: 0.8rem;
-  }
-
-  .month-picker {
-      font-size: 1rem;
-  }
-
-  .year-picker {
-      display: block;
-      text-align: center;
-  }
-
-  .info {
-      align-self: center;
-      text-align: center;
-  }
-
-  form {
-      width: 100%;
-      padding: 20px;
-  }
-
-  form input, form textarea {
-      width: 100%;
-  }
-
-  form label {
-      font-size: 16px;
-  }
-
-  input[type="submit"] {
-      font-size: 18px;
-      padding: 10px;
-  }
+h1{
+    padding-bottom: 20px;
 }
-
-@media (max-width: 480px) {
-  .calendar {
-      padding: 10px;
-  }
-
-  .calendar-header {
-      padding: 10px;
-  }
-
-  .calendar-week-days {
-      font-size: 0.7rem;
-  }
-
-  .calendar-days {
-      grid-template-columns: repeat(3, 1fr);
-  }
-
-  .calendar-days div {
-      width: 25px;
-      height: 25px;
-      font-size: 0.7rem;
-  }
-
-  form label {
-      font-size: 14px;
-  }
-
-  form input {
-      font-size: 14px;
-  }
-
-  input[type="submit"] {
-      font-size: 16px;
-      padding: 8px;
-  }
-}
-

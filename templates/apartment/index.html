@@ -36,7 +36,11 @@
     <h2>Апартамент "Скален Венец"</h2>
     <h1>Следващият ти незабравим престой те очаква тук!</h1>
     <div class="contact-btns">
-        <a id="reservation-btn" href="{% url 'reservation' %}">РЕЗЕРВИРАЙ</a>
+        {% if user.is_authenticated %}
+            <a id="reservation-btn" href="{% url 'create_reservation' %}">РЕЗЕРВИРАЙ</a>
+        {% else %}
+            <a id="reservation-btn" href="{% url 'register' %}">РЕЗЕРВИРАЙ</a>
+        {% endif %}
         <a id="contact-btn" target="_blank" href="reservation.html">КОНТАКТИ</a>
     </div>
 </header>
