@@ -1,0 +1,13 @@
+<html>
+<body>
+<h2>Благодарим за резервацията!</h2>
+<p>Вашата резервация е потвърдена:</p>
+<ul>
+    <li>Дата на пристигане: {{ reservation.start_date }}</li>
+    <li>Дата на напускане: {{ reservation.end_date }}</li>
+    <li>Брой нощувки: {{ reservation.end_date|date:"d-m-Y" }} → {{ reservation.start_date|date:"d-m-Y" }}</li>
+    <li>Статус: {{ reservation.status }}</li>
+</ul>
+<p>Очакваме ви!</p>
+</body>
+</html>
