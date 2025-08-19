@@ -5,56 +5,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'styles/reservation.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
     <title>Reservation</title>
 </head>
 <body>
-<div class="create-reservation-container">
-    <div class="calendar">
-        <div class="calendar-help-text">
-            <h1>Изберете дати:</h1>
-            <p>*чрез плъзгане</p>
+<div class="backward-index">
+    <a href="{% url 'index' %}"><i class="fa-solid fa-arrow-left"></i> Назад</a>
+</div>
+<main>
+    <div class="create-reservation-container">
+        <div class="calendar">
+            <div class="calendar-help-text">
+                <h1 class='reservation-h1'>Изберете дати:</h1>
+                <p>*чрез плъзгане</p>
+            </div>
+            <div id="calendar"></div>
         </div>
-        <div id="calendar"></div>
-    </div>
-    <div class="reservation-form">
-        {% if form.errors %}
-            <form id="reservation-form" method="post">
-        {% else %}
-            <form id="reservation-form" method="post" style="display: none;">
-        {% endif %}
-        {% csrf_token %}
-        <h1>Вашите детайли:</h1>
+        <div class="reservation-form">
+            {% if form.errors %}
+                <form id="reservation-form" method="post">
+            {% else %}
+                <form id="reservation-form" method="post" style="display: none;">
+            {% endif %}
+            {% csrf_token %}
+            <h1 class='reservation-h1'>Вашите детайли:</h1>
 
-        {% if form.non_field_errors %}
-            <div style="color:red; margin-bottom: 10px;">
-                {% for error in form.non_field_errors %}
-                    <p>{{ error }}</p>
+            {% if form.non_field_errors %}
+                <div style="color:red; margin-bottom: 10px;">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="form-row">
+                <div>
+                    {{ form.name.label_tag }}
+                    {{ form.name }}
+                    {% for error in form.name.errors %}
+                        <p style="color:red;">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ form.surname.label_tag }}
+                    {{ form.surname }}
+                    {% for error in form.surname.errors %}
+                        <p style="color:red;">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="form-field">
+                {{ form.email.label_tag }}
+                {{ form.email }}
+                {% for error in form.email.errors %}
+                    <p style="color:red;">{{ error }}</p>
                 {% endfor %}
             </div>
-        {% endif %}
 
-        {% for field in form %}
-            <div style="margin-bottom: 10px;">
-                {{ field.label_tag }}
-                {{ field }}
-                {% if field.errors %}
-                    <div style="color:red;">
-                        {% for error in field.errors %}
-                            <p>{{ error }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
+            <div class="form-field">
+                {{ form.phone.label_tag }}
+                {{ form.phone }}
+                {% for error in form.phone.errors %}
+                    <p style="color:red;">{{ error }}</p>
+                {% endfor %}
             </div>
-        {% endfor %}
 
-        <button type="submit">Продължи към плащане</button>
-        </form>
+            <div class="form-field">
+                {{ form.people.label_tag }}
+                {{ form.people }}
+                {% for error in form.people.errors %}
+                    <p style="color:red;">{{ error }}</p>
+                {% endfor %}
+            </div>
+
+            <div class="form-row">
+                <div>
+                    {{ form.start_date.label_tag }}
+                    {{ form.start_date }}
+                    {% for error in form.start_date.errors %}
+                        <p style="color:red;">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ form.end_date.label_tag }}
+                    {{ form.end_date }}
+                    {% for error in form.end_date.errors %}
+                        <p style="color:red;">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="form-field">
+                {{ form.notes.label_tag }}
+                {{ form.notes }}
+                {% for error in form.notes.errors %}
+                    <p style="color:red;">{{ error }}</p>
+                {% endfor %}
+            </div>
+
+            <button type="submit">Продължи към плащане</button>
+            </form>
+        </div>
     </div>
-</div>
+</main>
+<footer>
+    <p>&copy;Апартамент "Скален Венец" </p>
+    <div class="footer-main-text">
+        <p>Made by G&I design Co.</p>
+        <p>2025 All Rights Reserved.</p>
+    </div>
+</footer>
 <script src="{% static 'js/calendar.js' %}"></script>
+<script src="{% static 'js/index.js' %}"></script>
 </body>
 </html>

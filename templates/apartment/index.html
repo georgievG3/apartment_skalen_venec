@@ -1,4 +1,6 @@
 {% load static %}
+{% load i18n %}
+{% load tz %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,8 +28,8 @@
         {% endif %}
     </div>
     <div class="profile-modal" id="profile-modal">
-        <a href=""><i class="fa-regular fa-user"></i>Профил</a>
-        <a href=""><i class="fa-regular fa-house"></i>Резервации</a>
+        <a href="{% url 'user_profile' %}"><i class="fa-regular fa-user"></i>Профил</a>
+{#        <a href="{% url 'user-reservations' %}"><i class="fa-regular fa-house"></i>Резервации</a>#}
         <form method="post" action="{% url 'logout' %}">
             {% csrf_token %}
             <button type="submit"><i class="fa-solid fa-arrow-right-from-bracket"></i>Изход</button>
@@ -174,6 +176,30 @@
             </div>
         </div>
     </div>
+    {% if reservation %}
+        <div class="user-reservation">
+            <div class="user-reservation-left">
+                <h3>Вашата резервация:№={{ reservation.id }}</h3>
+                <p>{{ reservation.start_date }} - {{ reservation.end_date }}</p>
+                <p>{{ reservation.people }} човека {{ reservation.status }}</p>
+            </div>
+            <div class="user-reservation-right">
+                <img src="{% static 'images/image_50394625.JPG' %}" alt="">
+            </div>
+        </div>
+    {% endif %}
+    {% if messages %}
+        <div id="messages">
+            {% for message in messages %}
+                <div class="px-6 py-3 rounded-lg shadow-md mb-2
+              {% if message.tags == 'success' %} bg-green-500 text-white
+              {% elif message.tags == 'error' %} bg-red-500 text-white
+              {% else %} bg-gray-800 text-white {% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
 </main>
 
 <footer>
@@ -185,5 +211,11 @@
 </footer>
 <script src="{% static 'js/script.js' %}"></script>
 <script src="{% static 'js/index.js' %}"></script>
+<script>
+  setTimeout(() => {
+    const msgBox = document.getElementById("messages");
+    if (msgBox) msgBox.style.display = "none";
+  }, 10000);
+</script>
 </body>
 </html>

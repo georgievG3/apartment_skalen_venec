@@ -1,10 +1,12 @@
 from django.contrib.auth import get_user_model, login
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, TemplateView
 
 from accounts.forms import AppUserCreationForm, AuthForm
+from reservations.models import Reservation
 
 # Create your views here.
 
@@ -27,3 +29,9 @@ class RegisterView(CreateView):
 
 class Login(LoginView):
     authentication_form = AuthForm
+
+
+class UserProfileView(LoginRequiredMixin, TemplateView):
+    template_name = "accounts/user-profile.html"
+
+

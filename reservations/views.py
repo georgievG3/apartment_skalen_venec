@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
@@ -50,6 +51,7 @@ def create_reservation(request):
 
             reservation = form.save(commit=False)
             reservation.status = 'pending'
+            reservation.user = request.user
             reservation.save()
 
             total_amount = nights * settings.PRICE_PER_NIGHT
@@ -135,7 +137,8 @@ def stripe_webhook(request):
     return HttpResponse(status=200)
 
 def payment_success(request):
-    return render(request, 'reservations/success.html')
+    messages.success(request, "Успешно резервирахте апартамента!")
+    return redirect('index')
 
 def payment_cancel(request):
     return render(request, 'reservations/cancel.html')

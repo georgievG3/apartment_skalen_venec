@@ -4,10 +4,11 @@ from .models import Reservation
 class ReservationForm(forms.ModelForm):
     class Meta:
         model = Reservation
-        fields = ['name', 'surname', 'email', 'phone', 'start_date', 'end_date']
+        fields = ['name', 'surname', 'email', 'phone', 'people',  'start_date', 'end_date', 'notes']
         widgets = {
             'start_date': forms.TextInput(attrs={'readonly': 'readonly'}),
             'end_date': forms.TextInput(attrs={'readonly': 'readonly'}),
+            'notes': forms.Textarea(attrs={"style": "resize: none; outline: none;"}),
         }
 
         labels = {
@@ -15,6 +16,8 @@ class ReservationForm(forms.ModelForm):
             'surname': 'Фамилия',
             'email': 'Имейл',
             'phone': 'Телефон',
+            'people': 'Брой гости',
             'start_date': 'От',
-            'end_date': 'До'
+            'end_date': 'До',
+            'notes': 'Допълнителна информация'
         }
