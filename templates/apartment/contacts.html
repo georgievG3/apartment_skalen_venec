@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>Contacts</title>
+</head>
+<body>
+<div class="backward-index">
+    <a href="{% url 'index' %}"><i class="fa-solid fa-arrow-left"></i> Назад</a>
+</div>
+<div class="contacts-container">
+    <h1>Свържи се с нас</h1>
+    <hr>
+    <div class="socials">
+        <div class="social-card">
+            <p><a href=""><i class="fa-brands fa-facebook"></i></a>  Апартамент 'Скален Венец'</p>
+        </div>
+        <div class="social-card">
+            <p><a href=""><i class="fa-brands fa-instagram"></i></a> Апартамент 'Скален Венец'</p>
+        </div>
+        <div class="social-card">
+            <p><a href=""><i class="fa-brands fa-viber"></i></a> 0888888888</p>
+        </div>
+        <div class="social-card">
+            <p><a href=""><i class="fa-regular fa-envelope"></i></a> skalenvenec@gmail.com</p>
+        </div>
+    </div>
+
+    <form method="post" class = 'contact-form'>
+        {% csrf_token %}
+        <div>
+            {{ form.name.label_tag }}<br>
+            {{ form.name }}
+        </div>
+        <div>
+            {{ form.email.label_tag }}<br>
+            {{ form.email }}
+        </div>
+        <div>
+            {{ form.subject.label_tag }}<br>
+            {{ form.subject }}
+        </div>
+        <div>
+            {{ form.message.label_tag }}<br>
+            {{ form.message }}
+        </div>
+        <button type="submit">Изпрати</button>
+    </form>
+
+    {% for message in messages %}
+        <div style="color: green; margin-top: 10px;">{{ message }}</div>
+    {% endfor %}
+</div>
+<footer>
+    <p>&copy;Апартамент "Скален Венец" </p>
+    <div class="footer-main-text">
+        <p>Made by G&I design Co.</p>
+        <p>2025 All Rights Reserved.</p>
+    </div>
+</footer>
+</body>
+</html>
