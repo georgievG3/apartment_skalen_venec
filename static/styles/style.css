@@ -343,6 +343,9 @@ footer{
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    position: fixed;
+    bottom: 0;
+    margin-top: 50px;
 }
 
 .footer-main-text{
@@ -481,6 +484,7 @@ footer{
 box-shadow: 0px 0px 15px 0px rgba(153,143,143,0.75);
 -webkit-box-shadow: 0px 0px 15px 0px rgba(153,143,143,0.75);
 -moz-box-shadow: 0px 0px 15px 0px rgba(153,143,143,0.75);
+    margin-bottom: 10px;
 }
 
 #reservation-form input{
@@ -646,25 +650,57 @@ box-shadow: 0px 0px 15px 0px rgba(153,143,143,0.75);
 
 @media screen and (max-width: 425px) {
 
-    header {
-        height:45vh;
-    }
-
     h2{
-        font-size: 25px;
+        font-size: 21px;
     }
 
     h1{
-        font-size: 20px;
+        font-size: 18px;
     }
 
     header a{
-        font-size: 15px;
         padding: 10px 15px 10px 15px;
+    }
+
+    .login-btn{
+        padding: 3px;
+        font-size: 14px;
+    }
+
+    .icons-container{
+        gap: 5px;
+        left: 20px;
     }
 
     .slideshow-container{
         height: 40vh;
+    }
+
+    .contact-btns{
+        font-size: 12px;
+    }
+
+    #reservation-btn, #contact-btn{
+        padding: 12px 15px 12px 15px;
+    }
+
+    .user-reservation{
+        width: 200px;
+        height: 80px;
+        font-size: 10px;
+        padding: 5px;
+        gap: 0;
+        bottom: 100px;
+        left: 10px;
+    }
+
+    .fixed-bottom-right{
+        display: none;
+    }
+
+    .user-reservation img{
+        width: 50px;
+        height: 50px;
     }
 
     .image-row{
@@ -697,10 +733,21 @@ box-shadow: 0px 0px 15px 0px rgba(153,143,143,0.75);
 
     .conviniences{
         gap: 5px;
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .convenience{
         display: block;
+        font-size: 14px;
+    }
+
+    .additional-conveniences{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .show-more-btn{
+        font-size: 16px;
+        padding: 8px 18px;
     }
 
     .important-info-container h2{
@@ -709,6 +756,73 @@ box-shadow: 0px 0px 15px 0px rgba(153,143,143,0.75);
 
     .info{
         width: 90%;
-        font-size: 15px;
+        font-size: 14px;
     }
+
+    .footer-main-text{
+        font-size: 12px;
+    }
+
+    .create-reservation-container{
+        flex-direction: column;
+        margin-top: 100px;
+        padding: 0 0 500px 0;
+        gap: 50px;
+    }
+
+    #calendar {
+        width: 300px;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .fc .fc-toolbar-title{
+        font-size: 18px;
+    }
+
+    .fc .fc-button{
+        font-size: 12px;
+    }
+
+    .backward-index{
+        font-size: 16px;
+        top: 20px;
+        left: 20px;
+    }
+
+    .reservation-h1{
+        font-size: 26px !important;
+    }
+
+    .reservation-form{
+        width: 300px;
+    }
+
+    #reservation-form{
+        width: 100%;
+        padding-bottom: 100px;
+    }
+
+    .contacts-container{
+        width: 300px;
+    }
+
+    .contacts-container h1{
+        font-size: 20px!important;
+    }
+
+    .socials{
+        display: block;
+    }
+
+    .contact-form label{
+        font-size: 16px;
+    }
+
+    .contact-form button{
+        font-size: 16px;
+    }
+
   }
+
+
