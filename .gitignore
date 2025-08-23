@@ -11,9 +11,6 @@ venv/
 ENV/
 *.env
 
-# Static / media
-/staticfiles/
-
 # OS files
 .DS_Store
 Thumbs.db
