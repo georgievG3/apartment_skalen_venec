@@ -37,14 +37,21 @@ def contact_view(request):
             subject = form.cleaned_data['subject']
             message = form.cleaned_data['message']
 
-            send_mail(
-                subject=f"[Сайт] {subject}",
-                message=f"Име: {name}\nИмейл: {email}\n\nСъобщение:\n{message}",
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=["твояemail@example.com"],
-            )
+            full_message = f"Име: {name}\nИмейл: {email}\n\nСъобщение:\n{message}"
 
-            messages.success(request, "Съобщението е изпратено успешно!")
+            try:
+                send_mail(
+                    subject=f"[Сайт] {subject}",
+                    message=full_message,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[settings.DEFAULT_FROM_EMAIL],
+                    fail_silently=False,
+                )
+                messages.success(request, "Съобщението е изпратено успешно!")
+            except Exception as e:
+                print("Error sending contact form email:", e)
+                messages.error(request, "Имаше проблем при изпращане на съобщението.")
+
             return redirect("index")
     else:
         form = ContactForm()
