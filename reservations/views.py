@@ -118,23 +118,51 @@ def stripe_webhook(request):
                 reservation.status = 'paid'
                 reservation.save()
 
+                # ---- Имейл до клиента ----
                 if getattr(reservation, "email", None):
-                    subject = f"Потвърждение за резервация #{reservation.id}"
-                    message = render_to_string('reservations/email-confirmation.html', {
-                        'reservation': reservation
-                    })
+                    subject_client = f"Потвърждение за резервация #{reservation.id}"
+                    message_client = render_to_string(
+                        'reservations/email-confirmation.html',
+                        {'reservation': reservation}
+                    )
                     send_mail(
-                        subject,
-                        message,
+                        subject_client,
+                        message_client,
                         settings.DEFAULT_FROM_EMAIL,
                         [reservation.email],
                         fail_silently=True,
                     )
+
+                # ---- Имейл до собственика ----
+                nights = (reservation.end_date - reservation.start_date).days
+                total_price = nights * getattr(settings, "PRICE_PER_NIGHT", 0)
+
+                subject_owner = f"Нова платена резервация #{reservation.id}"
+                message_owner = (
+                    f"Имате нова резервация:\n\n"
+                    f"Клиент: {reservation.name} {reservation.surname}\n"
+                    f"Имейл: {reservation.email}\n"
+                    f"Телефон: {reservation.phone}\n"
+                    f"Период: {reservation.start_date} → {reservation.end_date}\n"
+                    f"Общо нощувки: {nights}\n"
+                    f"Брой хора: {reservation.people}\n"
+                    f"Бележки: {reservation.notes or 'няма'}\n\n"
+                    f"Обща цена: {total_price} {settings.CURRENCY.upper()}"
+                )
+                send_mail(
+                    subject_owner,
+                    message_owner,
+                    settings.DEFAULT_FROM_EMAIL,
+                    [settings.DEFAULT_FROM_EMAIL],  # твоя имейл
+                    fail_silently=True,
+                )
+
             except Exception:
                 print("Stripe webhook error:")
                 traceback.print_exc()
 
     return HttpResponse(status=200)
+
 
 def payment_success(request):
     messages.success(request, "Успешно резервирахте апартамента!")
