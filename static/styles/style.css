@@ -823,6 +823,21 @@ box-shadow: 0px 0px 15px 0px rgba(153,143,143,0.75);
         font-size: 16px;
     }
 
+    .profile-modal{
+        padding: 15px !important;
+        right: 50px;
+
+    }
+
+    .profile-modal a{
+        font-size: 14px;
+        padding: 0!important;
+    }
+
+    .profile-modal button{
+        font-size: 14px;
+    }
+
   }
 
 
