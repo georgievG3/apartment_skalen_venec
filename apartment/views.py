@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
-
+from django.utils.timezone import now
 from apartment.forms import ContactForm
 from reservations.models import Reservation
 
@@ -16,10 +16,11 @@ class IndexView(TemplateView):
         context = super().get_context_data(**kwargs)
 
         if self.request.user.is_authenticated:
+            today = now().date()
             context['reservation'] = (
                 Reservation.objects
-                .filter(user=self.request.user)
-                .order_by('-created_at')
+                .filter(user=self.request.user, end_date__gte=today)
+                .order_by('start_date')
                 .first()
             )
         else:

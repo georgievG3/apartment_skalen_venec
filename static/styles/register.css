@@ -45,3 +45,42 @@ body{
     background-color: #bc6a2f;
     color: white;
 }
+
+.backward-index{
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    font-size: 16px;
+}
+
+.backward-index a{
+    text-decoration: none;
+    color: #bc6a2f;
+    transition: 0.3s;
+}
+
+.backward-index a:hover{
+    transition: 0.3s;
+    color: #8a430f;
+}
+
+
+@media screen and (max-width: 425px) {
+    .register-form-container {
+        width: 80%;
+        padding: 10px;
+    }
+
+    .register-form-container h1 {
+        font-size: 20px;
+    }
+
+    .register-form-container form {
+        font-size: 16px;
+    }
+
+    .register-btn {
+        font-size: 16px;
+        padding: 10px 5px !important;
+    }
+}
