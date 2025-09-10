@@ -479,7 +479,7 @@ footer{
 #reservation-form{
     width: 600px;
     font-size: 16px;
-    padding: 60px 30px 30px 30px;
+    padding: 50px 25px 25px 25px;
     border-radius: 50px;
 box-shadow: 0px 0px 15px 0px rgba(153,143,143,0.75);
 -webkit-box-shadow: 0px 0px 15px 0px rgba(153,143,143,0.75);
@@ -489,7 +489,7 @@ box-shadow: 0px 0px 15px 0px rgba(153,143,143,0.75);
 
 #reservation-form input{
     width: 100%;
-    padding: 14px 0 14px 4px;
+    padding: 12px 0 12px 4px;
     outline: none;
     border-radius: 10px;
     border: 1px solid gray;
@@ -526,7 +526,7 @@ box-shadow: 0px 0px 15px 0px rgba(153,143,143,0.75);
 
 .reservation-h1{
     padding-bottom: 20px;
-    font-size: 36px !important;
+    font-size: 30px !important;
 }
 
 .backward-index{
@@ -647,6 +647,67 @@ box-shadow: 0px 0px 15px 0px rgba(153,143,143,0.75);
     transition: 0.3s;
     background-color: #8a430f;
 }
+
+.form-rules-check{
+    display: flex;
+}
+
+.form-rules-check input{
+    width: 40px !important;
+    cursor: pointer;
+}
+
+/*RULES PAGE*/
+.rules-container{
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    color: white;
+    z-index: 2;
+}
+
+.rules-h1{
+    margin: 0 0 -50px 0;
+    padding: 0;
+}
+
+.rules{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+    height: 80%;
+    gap: 30px;
+}
+
+.rules ul{
+    width: 45%;
+    list-style-type: disc;
+    line-height: 1.5;
+}
+
+.rules ul li{
+    text-shadow: 2px 2px 2px gray;
+}
+
+.rules-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
 
 @media screen and (max-width: 425px) {
 
@@ -836,6 +897,27 @@ box-shadow: 0px 0px 15px 0px rgba(153,143,143,0.75);
 
     .profile-modal button{
         font-size: 14px;
+    }
+
+    .form-rules-check input {
+        width: 20px !important;
+    }
+
+    /* RULES PAGE */
+    .rules-container{
+        height: auto;
+        padding: 20px;
+    }
+
+    .rules{
+        flex-direction: column;
+        width: 80%;
+        font-size: 14px;
+        padding-top: 60px;
+    }
+
+    .rules ul{
+        width: 100%;
     }
 
   }

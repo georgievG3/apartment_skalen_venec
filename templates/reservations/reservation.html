@@ -105,7 +105,12 @@
                     <p style="color:red;">{{ error }}</p>
                 {% endfor %}
             </div>
-
+            <div class="form-field form-rules-check">
+                <label for="agree_rules">
+                    Съгласявам се с <a href="{% url 'rules' %}" target="blank"> Правилата за престой</a>
+                </label>
+                <input type="checkbox" id="agree_rules" name="agree_rules" required>
+            </div>
             <button type="submit">Продължи към плащане</button>
             </form>
         </div>

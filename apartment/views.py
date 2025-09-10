@@ -58,3 +58,7 @@ def contact_view(request):
         form = ContactForm()
 
     return render(request, "apartment/contacts.html", {"form": form})
+
+
+class RulesView(TemplateView):
+    template_name = 'apartment/rules.html'
