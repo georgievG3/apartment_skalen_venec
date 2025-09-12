@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cd0bb6ea-8b68-4858-b83a-3b2804333c51" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apartment_skalen_venec/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/apartment_skalen_venec/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apartment/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apartment/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,11 +112,22 @@
       <workItem from="1757335986829" duration="7129000" />
       <workItem from="1757433786822" duration="591000" />
       <workItem from="1757517769898" duration="6173000" />
-      <workItem from="1757694171714" duration="2561000" />
+      <workItem from="1757694171714" duration="4893000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/apartment_skalen_venec/settings.py</url>
+          <line>11</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

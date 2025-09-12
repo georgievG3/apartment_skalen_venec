@@ -42,7 +42,7 @@ def contact_view(request):
 
             try:
                 send_mail(
-                    subject=f"[Сайт] {subject}",
+                    subject=f"Запитване от гост относно {subject}",
                     message=full_message,
                     from_email=settings.DEFAULT_FROM_EMAIL,
                     recipient_list=[settings.DEFAULT_FROM_EMAIL],
