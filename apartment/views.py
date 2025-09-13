@@ -62,3 +62,7 @@ def contact_view(request):
 
 class RulesView(TemplateView):
     template_name = 'apartment/rules.html'
+
+
+class AboutUsView(TemplateView):
+    template_name = 'apartment/about us.html'
