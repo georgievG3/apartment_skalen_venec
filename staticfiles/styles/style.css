@@ -200,6 +200,10 @@ main{
     margin-top: 50px;
 }
 
+.dots{
+    display: none;
+}
+
 .image-row-container {
     overflow: hidden;
     width: 100%;
@@ -806,6 +810,11 @@ box-shadow: 0px 0px 15px 0px rgba(153,143,143,0.75);
         width: 346px;
     }
 
+    .image-row img{
+        width: 250px;
+        margin: 10px;
+    }
+
     .text h2{
         font-size: 20px;
     }
@@ -856,6 +865,7 @@ box-shadow: 0px 0px 15px 0px rgba(153,143,143,0.75);
     .info{
         width: 90%;
         font-size: 14px;
+        gap: 50px;
     }
 
     .footer-main-text{
@@ -975,6 +985,11 @@ box-shadow: 0px 0px 15px 0px rgba(153,143,143,0.75);
 
     .about-us img{
         width: 300px;
+    }
+
+    .dots {
+        display: block;
+        text-align: center;
     }
 
   }
