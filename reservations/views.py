@@ -58,6 +58,7 @@ def create_reservation(request):
                     },
                     "quantity": 1,
                 }],
+                customer_email=form.cleaned_data['email'],
                 metadata={
                     "start_date": str(start),
                     "end_date": str(end),
