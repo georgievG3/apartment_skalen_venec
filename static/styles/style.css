@@ -708,6 +708,13 @@ box-shadow: 0px 0px 15px 0px rgba(153,143,143,0.75);
     z-index: -1;
 }
 
+#reservation-summary {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #f5f5f5;
+}
+
 
 @media screen and (max-width: 425px) {
 

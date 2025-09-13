@@ -138,10 +138,11 @@ def stripe_webhook(request):
                     {'reservation': reservation}
                 )
                 send_mail(
-                    f"Потвърждение за резервация #{reservation.id}",
-                    message_client,
-                    settings.DEFAULT_FROM_EMAIL,
-                    [reservation.email],
+                    subject=f"Потвърждение за резервация #00{reservation.id}",
+                    message="Вашата резервация е потвърдена!",  # текстов fallback
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[reservation.email],
+                    html_message=message_client,
                     fail_silently=True
                 )
 

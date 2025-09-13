@@ -1,13 +1,98 @@
-<html>
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Потвърждение за резервация</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f6f6f6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            background-color: #0077cc;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .content {
+            padding: 20px;
+        }
+        .content h2 {
+            color: #0077cc;
+        }
+        .details {
+            margin-top: 15px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .details td {
+            padding: 8px 5px;
+            border-bottom: 1px solid #eee;
+        }
+        .details td.label {
+            font-weight: bold;
+            width: 40%;
+            color: #555;
+        }
+        .footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 12px;
+            color: #888;
+            background: #f0f0f0;
+        }
+    </style>
+</head>
 <body>
-<h2>Благодарим за резервацията!</h2>
-<p>Вашата резервация е потвърдена:</p>
-<ul>
-    <li>Дата на пристигане: {{ reservation.start_date }}</li>
-    <li>Дата на напускане: {{ reservation.end_date }}</li>
-    <li>Брой нощувки: {{ reservation.end_date|date:"d-m-Y" }} → {{ reservation.start_date|date:"d-m-Y" }}</li>
-    <li>Статус: {{ reservation.status }}</li>
-</ul>
-<p>Очакваме ви!</p>
+    <div class="container">
+        <div class="header">
+            <h1>Благодарим за резервацията!</h1>
+        </div>
+        <div class="content">
+            <p>Вашата резервация е потвърдена. Ето подробностите:</p>
+            <table class="details">
+                <tr>
+                    <td class="label">Дата на пристигане:</td>
+                    <td>{{ reservation.start_date }}</td>
+                </tr>
+                <tr>
+                    <td class="label">Дата на напускане:</td>
+                    <td>{{ reservation.end_date }}</td>
+                </tr>
+                <tr>
+                    <td class="label">Брой нощувки:</td>
+                    <td>{{ reservation.end_date|date:"d-m-Y" }} → {{ reservation.start_date|date:"d-m-Y" }}</td>
+                </tr>
+                <tr>
+                    <td class="label">Брой гости:</td>
+                    <td>{{ reservation.people }}</td>
+                </tr>
+                {% if reservation.notes %}
+                <tr>
+                    <td class="label">Бележки:</td>
+                    <td>{{ reservation.notes }}</td>
+                </tr>
+                {% endif %}
+            </table>
+            <p>Очакваме ви! Ако имате въпроси, не се колебайте да се свържете с нас.</p>
+            <p>Телефон: +359 89 846 8818 или чрез контактната форма в нашия сайт.</p>
+        </div>
+        <div class="footer">
+            &copy; {{ now|date:"Y" }} Апартамент Скален Венец
+        </div>
+    </div>
 </body>
 </html>

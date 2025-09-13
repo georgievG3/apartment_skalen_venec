@@ -28,7 +28,7 @@
         {% endif %}
     </div>
     <div class="profile-modal" id="profile-modal">
-        <a href="{% url 'user_profile' %}"><i class="fa-regular fa-user"></i>Профил</a>
+{#        <a href="{% url 'user_profile' %}"><i class="fa-regular fa-user"></i>Профил</a>#}
 {#        <a href="{% url 'user-reservations' %}"><i class="fa-regular fa-house"></i>Резервации</a>#}
         <form method="post" action="{% url 'logout' %}">
             {% csrf_token %}
