@@ -8,7 +8,7 @@ from icalendar import Calendar, Event
 from datetime import datetime, timedelta
 import pytz
 
-BOOKING_ICAL_URL = "https://ical.booking.com/v1/export?t=016ddd1a-c963-4c2a-8678-ab408fe327ad"
+BOOKING_ICAL_URL = "https://ical.booking.com/v1/export?t=d10c9360-24c7-4970-85ff-7ada13f9794b"
 
 class BookingAvailabilityView(APIView):
     def get(self, request):
