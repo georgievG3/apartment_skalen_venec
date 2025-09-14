@@ -63,7 +63,7 @@ def reservations_ical(request):
         event.add('summary', 'Заето')
         # iCal използва края на деня като dtend, затова добавяме 1 ден
         event.add('dtstart', tz.localize(datetime.combine(r.start_date, datetime.min.time())))
-        event.add('dtend', tz.localize(datetime.combine(r.end_date + timedelta(days=1), datetime.min.time())))
+        event.add('dtend', tz.localize(datetime.combine(r.end_date, datetime.min.time())))
         event.add('description', f'Резервация от {r.name} {r.surname}')
         cal.add_component(event)
 
