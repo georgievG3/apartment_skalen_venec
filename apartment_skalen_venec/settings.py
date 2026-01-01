@@ -165,8 +165,8 @@ STRIPE_PUBLIC_KEY = config('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
 STRIPE_WEBHOOK_SECRET = config('STRIPE_WEBHOOK_SECRET')
 
-PRICE_PER_NIGHT = int(os.getenv("PRICE_PER_NIGHT", "90"))
-CURRENCY = os.getenv("CURRENCY", "bgn")
+PRICE_PER_NIGHT = int(os.getenv("PRICE_PER_NIGHT", "46"))
+CURRENCY = os.getenv("CURRENCY", "EUR")
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
