@@ -18,6 +18,7 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 def create_reservation(request):
+    total_amount = 0
     if request.method == 'POST':
         form = ReservationForm(request.POST)
         if form.is_valid():
@@ -79,7 +80,7 @@ def create_reservation(request):
     else:
         form = ReservationForm()
 
-    return render(request, 'reservations/reservation.html', {'form': form})
+    return render(request, 'reservations/reservation.html', {'form': form, 'PRICE_PER_NIGHT': settings.PRICE_PER_NIGHT, 'currency': settings.CURRENCY})
 
 
 

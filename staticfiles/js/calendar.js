@@ -4,29 +4,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const endInput = document.getElementById('id_end_date');
     const formEl = document.getElementById('reservation-form');
 
-    const summaryEl = document.createElement('div');
-    summaryEl.id = 'reservation-summary';
-    summaryEl.style.margin = '10px 0';
-    formEl.prepend(summaryEl);
-
-    function updateReservationSummary() {
-        const start = startInput.value;
-        const end = endInput.value;
-
-        if (start && end) {
-            const startDate = new Date(start);
-            const endDate = new Date(end);
-            const nights = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
-            const pricePerNight = parseFloat('{{ settings.PRICE_PER_NIGHT }}');
-            const total = nights * pricePerNight;
-
-            summaryEl.innerHTML = `<p>Нощувки: <strong>${nights}</strong></p>
-                                   <p>Обща цена: <strong>${total.toFixed(2)} {{ settings.CURRENCY|upper }}</strong></p>`;
-        } else {
-            summaryEl.innerHTML = '';
-        }
-    }
-
     let firstClickDate = null;
     let selectionEvent = null;
     let busyDates = [];
@@ -76,7 +53,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 startInput.value = firstClickDate;
                 endInput.value = '';
                 formEl.style.display = 'none';
-                updateReservationSummary();
             } else {
                 let start = firstClickDate < clickedDate ? firstClickDate : clickedDate;
                 let end = firstClickDate > clickedDate ? firstClickDate : clickedDate;
@@ -104,7 +80,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 startInput.value = start;
                 endInput.value = end;
                 formEl.style.display = 'block';
-                updateReservationSummary();
+
+                const pricePerNight = parseFloat(document.getElementById('price-per-night').textContent);
+
+                const startDate = new Date(start);
+                const endDate = new Date(end);
+                const nights = (endDate - startDate) / (1000*60*60*24);
+                const totalAmount = nights * pricePerNight;
+
+                document.getElementById('total_amount').textContent = totalAmount.toFixed(2);
 
                 firstClickDate = null;
             }

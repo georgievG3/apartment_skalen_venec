@@ -18,10 +18,10 @@
 <main>
     <div class="create-reservation-container">
         <div class="calendar">
-            <div class="calendar-help-text">
-                <h1 class='reservation-h1'>Изберете дати:</h1>
-                <p class='price'>46.02 Euro per night/90 Лева на нощувка</p>
-            </div>
+<!--            <div class="calendar-help-text">-->
+<!--                <h1 class='reservation-h1'>Изберете дати:</h1>-->
+<!--                <p class='price'>46.02 Euro per night/90 Лева на нощувка</p>-->
+<!--            </div>-->
             <div id="calendar"></div>
         </div>
         <div class="reservation-form">
@@ -112,7 +112,11 @@
                 </label>
                 <input type="checkbox" id="agree_rules" name="agree_rules" required>
             </div>
-            <button type="submit">Продължи към плащане</button>
+            <div class="reservation-form-confirm">
+                <button type="submit">Продължи към плащане</button>
+                <p>Обща сума: <span id="total_amount">0</span> {{ currency|upper }}</p>
+                <span id="price-per-night" style="display:none;">{{ PRICE_PER_NIGHT }}</span>
+            </div>
             </form>
         </div>
     </div>

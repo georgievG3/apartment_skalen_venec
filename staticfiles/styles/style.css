@@ -220,7 +220,7 @@ main{
 }
 
 .image-row img {
-    width: 350px;
+    width: 450px;
     height: auto;
     cursor: pointer;
     margin: 35px;
@@ -467,7 +467,7 @@ footer{
     justify-content: space-between;
     width: 100%;
     height: 100vh;
-    padding: 0 300px;
+    padding: 0 200px;
 }
 
 .calendar-help-text{
@@ -475,31 +475,30 @@ footer{
 }
 
 #calendar{
-    width: 600px;
+    width: 500px;
     border: 1px solid gray;
-    padding: 50px;
+    padding: 30px;
     border-radius: 50px;
 }
 
 #reservation-form{
-    width: 600px;
+    width: 500px;
     font-size: 16px;
-    padding: 60px 30px 30px 30px;
+    padding: 50px 25px 25px 25px;
     border-radius: 50px;
 box-shadow: 0px 0px 15px 0px rgba(153,143,143,0.75);
 -webkit-box-shadow: 0px 0px 15px 0px rgba(153,143,143,0.75);
 -moz-box-shadow: 0px 0px 15px 0px rgba(153,143,143,0.75);
     margin-bottom: 10px;
+    margin-top: 180px;
 }
 
 #reservation-form input{
     width: 100%;
-    padding: 14px 0 14px 4px;
+    padding: 12px 0 12px 4px;
     outline: none;
     border-radius: 10px;
     border: 1px solid gray;
-    margin-top: 5px;
-    margin-bottom: 5px;
     font-size: 16px;
 }
 
@@ -521,7 +520,7 @@ box-shadow: 0px 0px 15px 0px rgba(153,143,143,0.75);
     border-radius: 20px;
     cursor: pointer;
     transition: 0.3s;
-    margin: 10px auto;
+    margin: 0 10px 0 0;
 }
 
 #reservation-form button[type='submit']:hover{
@@ -531,7 +530,7 @@ box-shadow: 0px 0px 15px 0px rgba(153,143,143,0.75);
 
 .reservation-h1{
     padding-bottom: 20px;
-    font-size: 36px !important;
+    font-size: 30px !important;
 }
 
 .backward-index{
@@ -564,6 +563,21 @@ box-shadow: 0px 0px 15px 0px rgba(153,143,143,0.75);
 
 .form-field {
     margin-bottom: 10px;
+}
+
+.reservation-form-confirm{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.reservation-form-confirm p{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.reservation-form-confirm p span{
+    color: green;
 }
 
 /*CONTACTS PAGE*/
@@ -652,6 +666,7 @@ box-shadow: 0px 0px 15px 0px rgba(153,143,143,0.75);
     transition: 0.3s;
     background-color: #8a430f;
 }
+
 .form-rules-check{
     display: flex;
 }
@@ -663,7 +678,7 @@ box-shadow: 0px 0px 15px 0px rgba(153,143,143,0.75);
 
 /*RULES PAGE*/
 .rules-container{
-    height: 100vh;
+    height: 120vh;
     width: 100%;
     background-size: cover;
     background-repeat: no-repeat;
@@ -672,13 +687,11 @@ box-shadow: 0px 0px 15px 0px rgba(153,143,143,0.75);
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    position: relative;
     color: white;
     z-index: 2;
 }
 
 .rules-h1{
-    margin: 0 0 -50px 0;
     padding: 0;
 }
 
@@ -710,6 +723,13 @@ box-shadow: 0px 0px 15px 0px rgba(153,143,143,0.75);
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: -1;
+}
+
+#reservation-summary {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #f5f5f5;
 }
 
 .price{
@@ -998,6 +1018,5 @@ box-shadow: 0px 0px 15px 0px rgba(153,143,143,0.75);
     }
 
   }
-
 
 

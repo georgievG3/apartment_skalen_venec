@@ -81,6 +81,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 endInput.value = end;
                 formEl.style.display = 'block';
 
+                const pricePerNight = parseFloat(document.getElementById('price-per-night').textContent);
+
+                const startDate = new Date(start);
+                const endDate = new Date(end);
+                const nights = (endDate - startDate) / (1000*60*60*24);
+                const totalAmount = nights * pricePerNight;
+
+                document.getElementById('total_amount').textContent = totalAmount.toFixed(2);
+
                 firstClickDate = null;
             }
         }
