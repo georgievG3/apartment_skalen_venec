@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'availability',
+    'captcha',
 ] + PROJECT_APPS
 
 REST_FRAMEWORK = {
@@ -164,6 +165,9 @@ LOGOUT_REDIRECT_URL = reverse_lazy('index')
 STRIPE_PUBLIC_KEY = config('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
 STRIPE_WEBHOOK_SECRET = config('STRIPE_WEBHOOK_SECRET')
+
+RECAPTCHA_PUBLIC_KEY = config('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY')
 
 PRICE_PER_NIGHT = int(os.getenv("PRICE_PER_NIGHT", "35"))
 CURRENCY = os.getenv("CURRENCY", "EUR")
