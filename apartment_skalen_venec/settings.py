@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'availability',
+    'captcha',
 ] + PROJECT_APPS
 
 REST_FRAMEWORK = {
