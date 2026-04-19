@@ -169,7 +169,12 @@ STRIPE_WEBHOOK_SECRET = config('STRIPE_WEBHOOK_SECRET')
 RECAPTCHA_PUBLIC_KEY = config('RECAPTCHA_PUBLIC_KEY')
 RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY')
 
-PRICE_PER_NIGHT = int(os.getenv("PRICE_PER_NIGHT", "35"))
+SEASONAL_PRICES = {
+    1: 35,  # Jan–Mar
+    2: 45,  # Apr–Jun
+    3: 60,  # Jul–Sep
+    4: 40,  # Oct–Dec
+}
 CURRENCY = os.getenv("CURRENCY", "EUR")
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"

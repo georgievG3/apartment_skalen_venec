@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.conf import settings
@@ -9,11 +9,15 @@ from reservations.forms import ReservationForm
 from reservations.models import Reservation
 from availability.views import BookingAvailabilityView
 from rest_framework.test import APIRequestFactory
-from datetime import datetime
+from datetime import datetime, date, timedelta
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
 
 import stripe
+
+from .utils.pricing import get_price_for_date
+
+
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
@@ -39,7 +43,12 @@ def create_reservation(request):
                 form.add_error(None, "Крайната дата трябва да е след началната.")
                 return render(request, 'reservations/reservation.html', {'form': form})
 
-            total_amount = nights * settings.PRICE_PER_NIGHT
+            total_amount = 0
+            d = start
+            while d < end:
+                total_amount += get_price_for_date(d)
+                d += timedelta(days=1)
+
             amount_in_minor = int(total_amount * 100)
 
             success_url = request.build_absolute_uri(reverse('payment_success')) + "?session_id={CHECKOUT_SESSION_ID}"
@@ -53,7 +62,7 @@ def create_reservation(request):
                         "currency": settings.CURRENCY,
                         "product_data": {
                             "name": f"Резервация {start} → {end}",
-                            "description": f"{nights} нощувки x {settings.PRICE_PER_NIGHT} {settings.CURRENCY.upper()}",
+                            "description": f"{nights} нощувки – общо {total_amount:.2f} {settings.CURRENCY.upper()}",
                         },
                         "unit_amount": amount_in_minor,
                     },
@@ -80,7 +89,7 @@ def create_reservation(request):
     else:
         form = ReservationForm()
 
-    return render(request, 'reservations/reservation.html', {'form': form, 'PRICE_PER_NIGHT': settings.PRICE_PER_NIGHT, 'currency': settings.CURRENCY})
+    return render(request, 'reservations/reservation.html', {'currency': settings.CURRENCY})
 
 
 
@@ -112,7 +121,7 @@ def stripe_webhook(request):
             start_date = datetime.strptime(metadata.get('start_date'), "%Y-%m-%d").date()
             end_date = datetime.strptime(metadata.get('end_date'), "%Y-%m-%d").date()
             nights = (end_date - start_date).days
-            total_price = nights * settings.PRICE_PER_NIGHT
+            total_price = session["amount_total"] / 100
             user = None
             user_id = metadata.get('user_id')
             if user_id:
@@ -181,3 +190,19 @@ def payment_success(request):
 
 def payment_cancel(request):
     return render(request, 'reservations/cancel.html')
+
+def daily_prices(request):
+    today = date.today()
+    end = today.replace(year=today.year + 1)
+
+    data = []
+    d = today
+
+    while d <= end:
+        data.append({
+            "date": d.isoformat(),
+            "price": get_price_for_date(d)
+        })
+        d += timedelta(days=1)
+
+    return JsonResponse(data, safe=False)

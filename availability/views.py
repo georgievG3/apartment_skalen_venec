@@ -9,35 +9,43 @@ from datetime import datetime, timedelta
 import pytz
 
 BOOKING_ICAL_URL = "https://ical.booking.com/v1/export?t=d10c9360-24c7-4970-85ff-7ada13f9794b"
+AIRBNB_ICAL_URL = "https://www.airbnb.com/calendar/ical/XXXX.ics"
+
+def fetch_ical_events(url):
+    events = []
+    try:
+        r = requests.get(url, timeout=10)
+        r.raise_for_status()
+        cal = Calendar.from_ical(r.content)
+
+        for component in cal.walk():
+            if component.name == "VEVENT":
+                start = component.get('dtstart').dt
+                end = component.get('dtend').dt
+
+                if isinstance(start, datetime):
+                    start = start.date()
+                if isinstance(end, datetime):
+                    end = end.date()
+
+                events.append({
+                    "title": "Заето",
+                    "start": start.strftime("%Y-%m-%d"),
+                    "end": end.strftime("%Y-%m-%d"),
+                    "color": "red"
+                })
+
+    except Exception as e:
+        print(f"iCal error ({url}):", e)
+
+    return events
 
 class BookingAvailabilityView(APIView):
     def get(self, request):
         events = []
 
-        try:
-            r = requests.get(BOOKING_ICAL_URL, timeout=10)
-            r.raise_for_status()
-            cal = Calendar.from_ical(r.content)  # content вместо text
-
-            for component in cal.walk():
-                if component.name == "VEVENT":
-                    start = component.get('dtstart').dt
-                    end = component.get('dtend').dt
-
-                    if isinstance(start, datetime):
-                        start = start.date()
-                    if isinstance(end, datetime):
-                        end = end.date()
-
-                    events.append({
-                        "title": "Заето",
-                        "start": start.strftime("%Y-%m-%d"),
-                        "end": end.strftime("%Y-%m-%d"),
-                        "color": "red"
-                    })
-
-        except Exception as e:
-            print("Booking iCal error:", e)
+        events += fetch_ical_events(BOOKING_ICAL_URL)
+        events += fetch_ical_events(AIRBNB_ICAL_URL)
 
         paid_reservations = Reservation.objects.filter(status='paid')
         for r in paid_reservations:

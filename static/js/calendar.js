@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const startInput = document.getElementById('id_start_date');
     const endInput = document.getElementById('id_end_date');
     const formEl = document.getElementById('reservation-form');
+    let dailyPrices = {};
+
 
     let firstClickDate = null;
     let selectionEvent = null;
@@ -18,6 +20,15 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .catch(() => console.warn('Неуспешно зареждане на заетите дати.'));
 
+    fetch('/api/prices/')
+        .then(res => res.json())
+        .then(data => {
+            data.forEach(p => {
+                dailyPrices[p.date] = p.price;
+            });
+        calendar.render();
+        });
+
     const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         locale: 'bg',
@@ -28,6 +39,23 @@ document.addEventListener('DOMContentLoaded', function () {
         events: '/api/availability/booking/',
         eventDisplay: 'block',
         height: 'auto',
+
+        dayCellContent: function(arg) {
+            const dateStr = arg.date.toISOString().split('T')[0];
+            const price = dailyPrices[dateStr];
+
+            if (!price) {
+                return { html: `<div class="fc-day-number">${arg.dayNumberText}</div>` };
+            }
+
+            return {
+                html: `
+                    <div class="fc-day-number">${arg.dayNumberText}</div>
+                    <div class="fc-day-price">${price} €</div>
+            `
+        };
+    },
+
 
         dateClick: function(info) {
             const clickedDate = info.dateStr;
@@ -81,19 +109,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 endInput.value = end;
                 formEl.style.display = 'block';
 
-                const pricePerNight = parseFloat(document.getElementById('price-per-night').textContent);
+                let total = 0;
+                let d = new Date(start);
 
-                const startDate = new Date(start);
-                const endDate = new Date(end);
-                const nights = (endDate - startDate) / (1000*60*60*24);
-                const totalAmount = nights * pricePerNight;
+                while (d < new Date(end)) {
+                    const key = d.toISOString().split('T')[0];
+                    total += dailyPrices[key] || 0;
+                     d.setDate(d.getDate() + 1);
+                }
 
-                document.getElementById('total_amount').textContent = totalAmount.toFixed(2);
+                document.getElementById('total_amount').textContent = total.toFixed(2);
+
 
                 firstClickDate = null;
             }
         }
     });
-
     calendar.render();
 });
